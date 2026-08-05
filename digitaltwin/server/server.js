@@ -25,6 +25,10 @@ mongoose.connect(MONGO_URI)
     console.warn('⚠️ MongoDB connection deferred or unavailable. Server running in standalone mode.', err.message);
   });
 
-app.listen(PORT, '0.0.0.0', () => {
-  console.log(`🚀 Portfolio Backend Server listening on http://localhost:${PORT}`);
-});
+if (!process.env.VERCEL) {
+  app.listen(PORT, '0.0.0.0', () => {
+    console.log(`🚀 Portfolio Backend Server listening on http://localhost:${PORT}`);
+  });
+}
+
+export default app;
