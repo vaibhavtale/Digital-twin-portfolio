@@ -3,6 +3,7 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import mongoose from 'mongoose';
 import contactRoutes from './routes/contactRoutes.js';
+import chatRoutes from './routes/chatRoutes.js';
 
 dotenv.config();
 
@@ -15,6 +16,7 @@ app.use(express.json());
 
 // API Routes
 app.use('/api/contact', contactRoutes);
+app.use('/api/chat', chatRoutes);
 
 // Database Connection with graceful fallback
 mongoose.connect(MONGO_URI)
@@ -23,6 +25,6 @@ mongoose.connect(MONGO_URI)
     console.warn('⚠️ MongoDB connection deferred or unavailable. Server running in standalone mode.', err.message);
   });
 
-app.listen(PORT, () => {
+app.listen(PORT, '0.0.0.0', () => {
   console.log(`🚀 Portfolio Backend Server listening on http://localhost:${PORT}`);
 });
